@@ -4,12 +4,14 @@ import antiquaService from './services/antiqua'
 import solarBuddhicaService from './services/solarBuddhica'
 import zerpfyService from './services/zerpfy'
 import './index.css'
+import moment from 'moment'
+// import Vaccinations from './components/Vaccinations'
 
 const App = () => {
   const [vaccinations, setVaccinations] = useState([])
-  const [antiqua, setAntiqua] = useState ([])
-  const [solarBuddhica, setSolarBuddhica] = useState ([])
-  const [zerpfy, setZerpfy] = useState ([])
+  const [antiqua, setAntiqua] = useState([])
+  const [solarBuddhica, setSolarBuddhica] = useState([])
+  const [zerpfy, setZerpfy] = useState([])
 
   useEffect(() => {
     vaccinationsSercive
@@ -17,7 +19,7 @@ const App = () => {
       .then(initialVaccinations => {
         setVaccinations(initialVaccinations)
       })
-  })
+  }, [vaccinations]);
 
   useEffect(() => {
     antiquaService
@@ -25,7 +27,7 @@ const App = () => {
       .then(initialVaccinations => {
         setAntiqua(initialVaccinations)
       })
-  })
+  }, [antiqua]);
 
   useEffect(() => {
     solarBuddhicaService
@@ -33,7 +35,7 @@ const App = () => {
       .then(initialVaccinations => {
         setSolarBuddhica(initialVaccinations)
       })
-  })
+  }, [solarBuddhica]);
 
   useEffect(() => {
     zerpfyService
@@ -41,19 +43,37 @@ const App = () => {
       .then(initialVaccinations => {
         setZerpfy(initialVaccinations)
       })
-  })
+  }, [zerpfy]);
+
+
+  //join Antiqua, SolarBuddhica and Zerphy arrays to one
+  //modify manufacturers array so the date is in form yyyy-mm-dd
+  const compinedArrays = [].concat(antiqua, solarBuddhica, zerpfy)
+
+  const formatDate = (value) => {
+    return moment(value).format('YYYY-MM-DD')
+  }
+
+  const manufacturers = compinedArrays.map(item => ({
+    id: item.id,
+    orderNumber: item.orderNumber,
+    responsiblePerson: item.responsiblePerson,
+    healthCareDistrict: item.healthCareDistrict,
+    vaccine: item.vaccine,
+    injections: item.injections,
+    arrived: formatDate(item.arrived)
+  }))
+
+  //check how many orders came "2021-04-12" -> 28 orders arrived that day
+  //need to find the sum of order of that date from manufacturers array
+  
 
   //total sum of injections done
-  const vaccinationsLength = vaccinations.length
+  const injectionsDone = vaccinations.length
 
   //total sum of orders
-  const orderSum = antiqua.length + solarBuddhica.length + zerpfy.length
+  const orderSum = manufacturers.length
 
-  //check how many orders came "2021-04-12"  
-  //-> change the date form from 2021-04-12T11:10:06.473587Z to 2021-04-12 in every array
-  //-> calculate orders from Antiqua, SolarBuddhica and Zerpfy
-  
-  
   //check how  many vaccines expired "2021-03-20"
   //-> bottle expires in 30 days from arrival
   //-> remaining injections in expired bottles
@@ -67,12 +87,17 @@ const App = () => {
       </div>
       <div>
         <p>Total number of orders {orderSum}.</p>
-        <p>Vaccinations done {vaccinationsLength}.</p>
+        <p>Vaccinations done {injectionsDone}.</p>
         <p>-day- arrived -number- orders.</p>
         <p>When counted from -day- -number- vaccines expired
           before usage (injections in the expiring bottles -number-
           and injections done from the expired bottles -number-)</p>
       </div>
+      {/* <div>
+        <table>
+          <Vaccinations passedValue={passedValue} />
+        </table>
+      </div> */}
     </div>
   )
 

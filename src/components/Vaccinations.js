@@ -1,14 +1,14 @@
 import React from 'react'
 
-const Vaccinations = ({ vaccinations }) => {
+const Vaccinations = ({ passedValue }) => {
     //console.log(vaccinations.map(item => item))
     return (
         <tbody>
-            {vaccinations.map(({ id, vaccinationDate }) => {
+            {passedValue.map(({ id, vaccine, arrived }) => {
                 return (
                     <tr key={id}>
-                        <td>{id}</td>
-                        <td>{vaccinationDate}</td>
+                        <td>{vaccine}</td>
+                        <td>{arrived}</td>
                     </tr>
                 )
             })}
