@@ -46,7 +46,7 @@ const App = () => {
   }, [zerpfy]);
 
 
-  //join Antiqua, SolarBuddhica and Zerphy arrays to one
+  //join Antiqua, SolarBuddhica and Zerpfy arrays to one
   //modify manufacturers array so the date is in form yyyy-mm-dd
   const compinedArrays = [].concat(antiqua, solarBuddhica, zerpfy)
 
@@ -64,21 +64,25 @@ const App = () => {
     arrived: formatDate(item.arrived)
   }))
 
-  //check how many orders came "2021-04-12" -> 28 orders arrived that day
-  //need to find the sum of order of that date from manufacturers array
-  
+  //total sum of orders
+  const orderSum = manufacturers.length
 
   //total sum of injections done
   const injectionsDone = vaccinations.length
 
-  //total sum of orders
-  const orderSum = manufacturers.length
+  //vaccines that came 2021-03-20 -> right sum is 61
+  const arrivalDay = '2021-03-20'
+  const arrivedOrdersSum = manufacturers.filter(item => item.arrived === arrivalDay).length
 
-  //check how  many vaccines expired "2021-03-20"
+  //check how  many vaccines expired "2021-04-12"
   //-> bottle expires in 30 days from arrival
   //-> remaining injections in expired bottles
   //-> injections done from the expired bottles
+  
 
+  //const startDay = '2021-01-01'
+  //const endDay = '2021-04-12'
+  //const filteredData = manufacturers.filter(item => new Date(item.arrived) <= new Date("2021-04-12")).length
 
   return (
     <div>
@@ -86,18 +90,25 @@ const App = () => {
         <h2>Vaccinations exercise</h2>
       </div>
       <div>
+        <p>Antiqua vaccine (4 injections in 1 bottle)</p>
+        <p>SolarBuddhica vaccine (6 injections in 1 bottle)</p>
+        <p>Zerpfy vaccine (5 injections in 1 bottle)</p>
+      </div>
+      <div>
+        {/* <p>{filteredData}</p> */}
+        
         <p>Total number of orders {orderSum}.</p>
         <p>Vaccinations done {injectionsDone}.</p>
-        <p>-day- arrived -number- orders.</p>
-        <p>When counted from -day- -number- vaccines expired
+        <p>{arrivalDay} arrived {arrivedOrdersSum} (61) orders.</p>
+        <p>When counted from 2021-04-12 -number- vaccines expired
           before usage (injections in the expiring bottles -number-
           and injections done from the expired bottles -number-)</p>
       </div>
-      {/* <div>
-        <table>
-          <Vaccinations passedValue={passedValue} />
-        </table>
-      </div> */}
+      <div>
+        {/* <table>
+          <Vaccinations manufacturers={manufacturers} />
+        </table> */}
+      </div>
     </div>
   )
 
