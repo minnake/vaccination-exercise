@@ -78,9 +78,11 @@ const App = () => {
   //-> bottle expires in 30 days from arrival
   //-> remaining injections in expired bottles
   //-> injections done from the expired bottles
-  
+  //const vaccineData = ['id', 'name', 'sourceBottle', 'injections', 'injected', 'arrived']
+  //manufacturers.id === vaccinations.sourceBottle
 
-  //const startDay = '2021-01-01'
+
+
   //const endDay = '2021-04-12'
   //const filteredData = manufacturers.filter(item => new Date(item.arrived) <= new Date("2021-04-12")).length
 
@@ -96,7 +98,7 @@ const App = () => {
       </div>
       <div>
         {/* <p>{filteredData}</p> */}
-        
+
         <p>Total number of orders {orderSum}.</p>
         <p>Vaccinations done {injectionsDone}.</p>
         <p>{arrivalDay} arrived {arrivedOrdersSum} (61) orders.</p>
