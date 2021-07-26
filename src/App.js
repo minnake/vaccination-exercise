@@ -45,15 +45,14 @@ const App = () => {
       })
   }, [zerpfy]);
 
-
   //join Antiqua, SolarBuddhica and Zerpfy arrays to one
-  //modify manufacturers array so the date is in form yyyy-mm-dd
   const compinedArrays = [].concat(antiqua, solarBuddhica, zerpfy)
 
   const formatDate = (value) => {
     return moment(value).format('YYYY-MM-DD')
   }
 
+  //modify manufacturers array so the date is in form yyyy-mm-dd
   const manufacturers = compinedArrays.map(item => ({
     id: item.id,
     orderNumber: item.orderNumber,
