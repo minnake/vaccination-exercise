@@ -1,3 +1,18 @@
 div {
   padding: 10px 0px 0px 25px;
 }
+
+table {
+  border-collapse: collapse;
+  text-align: right;
+}
+
+th {
+  padding: 5px 20px 5px 10px;
+  border: 1px solid black;
+}
+
+td {
+  padding: 5px 20px 5px 10px;
+  border: 1px solid black;
+}

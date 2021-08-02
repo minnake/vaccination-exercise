@@ -5,7 +5,7 @@ import solarBuddhicaService from './services/solarBuddhica'
 import zerpfyService from './services/zerpfy'
 import './index.css'
 import moment from 'moment'
-// import Vaccinations from './components/Vaccinations'
+//import Vaccinations from './components/Vaccinations'
 
 const App = () => {
   const [vaccinations, setVaccinations] = useState([])
@@ -14,54 +14,53 @@ const App = () => {
   const [zerpfy, setZerpfy] = useState([])
 
   useEffect(() => {
-    vaccinationsSercive
-      .getAll()
-      .then(initialVaccinations => {
-        setVaccinations(initialVaccinations)
-      })
-  }, [vaccinations]);
+    (async () => {
+      await vaccinationsSercive
+        .getAll()
+        .then(initialVaccinations => {
+          setVaccinations(initialVaccinations)
+        })
+      await antiquaService
+        .getAll()
+        .then(initialVaccinations => {
+          setAntiqua(initialVaccinations)
+        })
+      await solarBuddhicaService
+        .getAll()
+        .then(initialVaccinations => {
+          setSolarBuddhica(initialVaccinations)
+        })
+      await zerpfyService
+        .getAll()
+        .then(initialVaccinations => {
+          setZerpfy(initialVaccinations)
+        })
+    })()
 
-  useEffect(() => {
-    antiquaService
-      .getAll()
-      .then(initialVaccinations => {
-        setAntiqua(initialVaccinations)
-      })
-  }, [antiqua]);
 
-  useEffect(() => {
-    solarBuddhicaService
-      .getAll()
-      .then(initialVaccinations => {
-        setSolarBuddhica(initialVaccinations)
-      })
-  }, [solarBuddhica]);
+  })
 
-  useEffect(() => {
-    zerpfyService
-      .getAll()
-      .then(initialVaccinations => {
-        setZerpfy(initialVaccinations)
-      })
-  }, [zerpfy]);
-
-  //join Antiqua, SolarBuddhica and Zerpfy arrays to one
-  const compinedArrays = [].concat(antiqua, solarBuddhica, zerpfy)
-
+  //format date to form YYYY-MM-DD
   const formatDate = (value) => {
     return moment(value).format('YYYY-MM-DD')
   }
 
+  //compare manufacturers.id to vaccinations.sourceBottle and count, how many times
+  //id is found and store the sum in injectionSum
+  const getInjectionSum = (id) => {
+    const injectionSum = vaccinations.filter(item => id === item.sourceBottle).length
+    return injectionSum
+  }
+
   //modify manufacturers array so the date is in form yyyy-mm-dd
-  const manufacturers = compinedArrays.map(item => ({
-    id: item.id,
-    orderNumber: item.orderNumber,
-    responsiblePerson: item.responsiblePerson,
-    healthCareDistrict: item.healthCareDistrict,
-    vaccine: item.vaccine,
-    injections: item.injections,
-    arrived: formatDate(item.arrived)
+  //join Antiqua, SolarBuddhica and Zerpfy arrays to one
+  const manufacturers = [...antiqua, ...solarBuddhica, ...zerpfy].map(item => ({
+    ...item,
+    arrived: formatDate(item.arrived),
+    injectionSum: getInjectionSum(item.id)
   }))
+
+  //console.log(manufacturers)
 
   //total sum of orders
   const orderSum = manufacturers.length
@@ -71,19 +70,19 @@ const App = () => {
 
   //vaccines that came 2021-03-20 -> right sum is 61
   const arrivalDay = '2021-03-20'
-  const arrivedOrdersSum = manufacturers.filter(item => item.arrived === arrivalDay).length
+  const arrivedOrdersSum = manufacturers.filter(item => arrivalDay === item.arrived).length
+
 
   //check how  many vaccines expired "2021-04-12"
   //-> bottle expires in 30 days from arrival
   //-> remaining injections in expired bottles
   //-> injections done from the expired bottles
+
   //const vaccineData = ['id', 'name', 'sourceBottle', 'injections', 'injected', 'arrived']
   //manufacturers.id === vaccinations.sourceBottle
-
-
-
   //const endDay = '2021-04-12'
-  //const filteredData = manufacturers.filter(item => new Date(item.arrived) <= new Date("2021-04-12")).length
+  //const filteredData = manufacturers.filter(item => item.arrived <= endDay).length
+
 
   return (
     <div>
@@ -101,6 +100,8 @@ const App = () => {
         <p>Total number of orders {orderSum}.</p>
         <p>Vaccinations done {injectionsDone}.</p>
         <p>{arrivalDay} arrived {arrivedOrdersSum} (61) orders.</p>
+        {/* <p>When counted from 2021-04-12 12 590 vaccines expired before usage (injections in the expiring bottles 17 423
+          and injections done from the expired bottles 4833)</p> */}
         <p>When counted from 2021-04-12 -number- vaccines expired
           before usage (injections in the expiring bottles -number-
           and injections done from the expired bottles -number-)</p>
