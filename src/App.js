@@ -46,8 +46,6 @@ const App = () => {
   const formatDate = (value) => {
     const date = DateTime.fromISO(value)
     const formatDate = date.toLocaleString(DateTime.DATETIME_FULL)
-    // const date = new Date(Date.UTC(value))
-    // const formatDate = new Intl.DateTimeFormat('fi-FIN').format(date)
     return formatDate
     //moment(value).format('YYYY-MM-DD')
   }
