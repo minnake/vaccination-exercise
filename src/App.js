@@ -42,10 +42,10 @@ const App = () => {
 
   })
 
-  //format date to form YYYY-MM-DD
+  //format date to form YYYY-MM-DD. Right now formatted to dd.mm.yyyy
   const formatDate = (value) => {
     const date = DateTime.fromISO(value)
-    const formatDate = date.toLocaleString(DateTime.DATETIME_FULL)
+    const formatDate = date.minus({ hours: 2 }).setLocale('fi').toLocaleString(DateTime.DATE_SHORT)
     return formatDate
     //moment(value).format('YYYY-MM-DD')
   }
@@ -90,14 +90,12 @@ const App = () => {
   //-> bottle expires in 30 days from arrival
   //-> remaining injections in expired bottles
   //-> injections done from the expired bottles
-  // const startDay = "1/1/2021"
-  // const endDay = "4/12/2021"
+/*   const endDay = "12.4.2021"
 
-  // const expiredVaccines = manufacturers
-  // .filter(item => item.arrived >= startDay && item.arrived <= endDay)
-  // .map(item => item.injectionSum)
-  // .reduce((acc, value) => acc + value, 0)
-  // console.log(expiredVaccines)
+  const expiredVaccines = manufacturers.reduce((acc, value) =>
+    value.arrived <= endDay ? acc + value.injections : acc, 0)
+
+  console.log(expiredVaccines) */
 
 
   return (
@@ -115,7 +113,7 @@ const App = () => {
 
         <p>Total number of orders {orderSum}.</p>
         <p>Vaccinations done {injectionsDone}.</p>
-        <p>{arrivalDay} arrived {arrivedOrdersSum} (61) orders.</p>
+        <p>{arrivalDay} arrived {arrivedOrdersSum} orders.</p>
         {/* <p>When counted from 2021-04-12 12 590 vaccines expired before usage (injections in the expiring bottles 17 423
           and injections done from the expired bottles 4833)</p> */}
         <p>When counted from 2021-04-12 -number- vaccines expired
