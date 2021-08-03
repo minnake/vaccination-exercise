@@ -4,8 +4,10 @@ import antiquaService from './services/antiqua'
 import solarBuddhicaService from './services/solarBuddhica'
 import zerpfyService from './services/zerpfy'
 import './index.css'
-import moment from 'moment'
-//import Vaccinations from './components/Vaccinations'
+//import moment from 'moment'
+import { DateTime } from 'luxon'
+import Vaccinations from './components/Vaccinations'
+//import { orderBy } from 'lodash'
 
 const App = () => {
   const [vaccinations, setVaccinations] = useState([])
@@ -42,8 +44,21 @@ const App = () => {
 
   //format date to form YYYY-MM-DD
   const formatDate = (value) => {
-    return moment(value).format('YYYY-MM-DD')
+    const date = DateTime.fromISO(value)
+    const formatDate = date.toLocaleString(DateTime.DATETIME_FULL)
+    // const date = new Date(Date.UTC(value))
+    // const formatDate = new Intl.DateTimeFormat('fi-FIN').format(date)
+    return formatDate
+    //moment(value).format('YYYY-MM-DD')
   }
+
+  // const newAntiqua = antiqua.map(item => ({
+  //   ...item,
+  //   arrived: formatDate(item.arrived)
+  // }))
+
+  // const antiquaArrived = newAntiqua.filter(item => arrivalDay === item.arrived).length
+  // console.log(antiquaArrived)
 
   //compare manufacturers.id to vaccinations.sourceBottle and count, how many times
   //id is found and store the sum in injectionSum
@@ -69,7 +84,7 @@ const App = () => {
   const injectionsDone = vaccinations.length
 
   //vaccines that came 2021-03-20 -> right sum is 61
-  const arrivalDay = '2021-03-20'
+  const arrivalDay = '20.3.2021'
   const arrivedOrdersSum = manufacturers.filter(item => arrivalDay === item.arrived).length
 
 
@@ -77,11 +92,14 @@ const App = () => {
   //-> bottle expires in 30 days from arrival
   //-> remaining injections in expired bottles
   //-> injections done from the expired bottles
+  // const startDay = "1/1/2021"
+  // const endDay = "4/12/2021"
 
-  //const vaccineData = ['id', 'name', 'sourceBottle', 'injections', 'injected', 'arrived']
-  //manufacturers.id === vaccinations.sourceBottle
-  //const endDay = '2021-04-12'
-  //const filteredData = manufacturers.filter(item => item.arrived <= endDay).length
+  // const expiredVaccines = manufacturers
+  // .filter(item => item.arrived >= startDay && item.arrived <= endDay)
+  // .map(item => item.injectionSum)
+  // .reduce((acc, value) => acc + value, 0)
+  // console.log(expiredVaccines)
 
 
   return (
@@ -107,9 +125,10 @@ const App = () => {
           and injections done from the expired bottles -number-)</p>
       </div>
       <div>
-        {/* <table>
+        <table>
+          {/* <Vaccinations manufacturers={orderBy(manufacturers, ['arrived'])} */}
           <Vaccinations manufacturers={manufacturers} />
-        </table> */}
+        </table>
       </div>
     </div>
   )
