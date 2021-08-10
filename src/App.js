@@ -44,28 +44,20 @@ const App = () => {
 
   //format date to form YYYY-MM-DD. Right now formatted to dd.mm.yyyy
   const formatDate = (value) => {
-    const date = DateTime.fromISO(value)
-    const formatDate = date.minus({ hours: 2 }).setLocale('fi').toLocaleString(DateTime.DATE_SHORT)
-    return formatDate
+    const date = DateTime.fromISO(value).toUTC()
+    //const formatDate = date.minus({ hours: 2 }).setLocale('fi').toLocaleString(DateTime.DATE_SHORT)
+    //console.log(date)
+    return date
     //moment(value).format('YYYY-MM-DD')
   }
 
-  // const newAntiqua = antiqua.map(item => ({
-  //   ...item,
-  //   arrived: formatDate(item.arrived)
-  // }))
-
-  // const antiquaArrived = newAntiqua.filter(item => arrivalDay === item.arrived).length
-  // console.log(antiquaArrived)
-
-  //compare manufacturers.id to vaccinations.sourceBottle and count, how many times
-  //id is found and store the sum in injectionSum
+  /*compare manufacturers.id to vaccinations.sourceBottle and count, how many times
+  id is found and store the sum in injectionSum*/
   const getInjectionSum = (id) => {
     const injectionSum = vaccinations.filter(item => id === item.sourceBottle).length
     return injectionSum
   }
 
-  //modify manufacturers array so the date is in form yyyy-mm-dd
   //join Antiqua, SolarBuddhica and Zerpfy arrays to one
   const manufacturers = [...antiqua, ...solarBuddhica, ...zerpfy].map(item => ({
     ...item,
@@ -82,20 +74,28 @@ const App = () => {
   const injectionsDone = vaccinations.length
 
   //vaccines that came 2021-03-20 -> right sum is 61
-  const arrivalDay = '20.3.2021'
-  const arrivedOrdersSum = manufacturers.filter(item => arrivalDay === item.arrived).length
+  const arrivalDay = DateTime.fromObject({year: 2021, day:20, month:3}).toISODate()
+  //console.log(arrivalDay)
+  const arrivedOrdersSum = manufacturers.filter(item => arrivalDay === item.arrived.toISODate()).length
 
+  //sum of the all injections in bottle -> 25015
+  /*const totalVaccinesBottle = manufacturers.reduce((total, value) => total = total + value.injections, 0)
+  console.log(totalVaccinesBottle) */
 
   //check how  many vaccines expired "2021-04-12"
   //-> bottle expires in 30 days from arrival
   //-> remaining injections in expired bottles
   //-> injections done from the expired bottles
-/*   const endDay = "12.4.2021"
+  // const startDay = '1.1.2021'
+  /*const endDay = '13.3.2021'
 
-  const expiredVaccines = manufacturers.reduce((acc, value) =>
+   const result = manufacturers.filter(item => item.arrived <= endDay).length
+  console.log(result)*/
+
+  /*const expiredVaccines = manufacturers.reduce((acc, value) =>
     value.arrived <= endDay ? acc + value.injections : acc, 0)
 
-  console.log(expiredVaccines) */
+  console.log(expiredVaccines)*/
 
 
   return (
