@@ -6,14 +6,22 @@ import zerpfyService from './services/zerpfy'
 import './index.css'
 import { DateTime } from 'luxon'
 import Vaccinations from './components/Vaccinations'
+import Loading from './components/Loading'
+import Clock from './components/Clock'
+
 
 const App = () => {
   const [vaccinations, setVaccinations] = useState([])
   const [antiqua, setAntiqua] = useState([])
   const [solarBuddhica, setSolarBuddhica] = useState([])
   const [zerpfy, setZerpfy] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 2500);
+
     (async () => {
       await vaccinationsSercive
         .getAll()
@@ -36,8 +44,6 @@ const App = () => {
           setZerpfy(initialVaccinations)
         })
     })()
-
-
   })
 
   //format date to form YYYY-MM-DD. Right now formatted to dd.mm.yyyy
@@ -96,14 +102,19 @@ const App = () => {
   const expiredVaccines = manufacturers.reduce((acc, value) =>
     value.arrived.toISODate() <= endDay ? acc + value.injections - value.injectionSum : acc, 0)*/
 
-  //total number of bottles not used any injections
+  //numbers of bottle with no injections done
   const valueZero = manufacturers.filter(item => item.injectionSum === 0).length
 
   //bottles that has all vaccines injected => 14
-  
 
   return (
     <div>
+      <div>
+        {isLoading === true ?
+          < Loading />:<Clock/>
+          
+          }
+      </div>
 
       <div>
         <h2>Vaccinations exercise</h2>
