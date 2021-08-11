@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3003/vaccinations'
+const baseUrl = 'http://localhost:3001/api/vaccinations'
 
 const getAll = () => {
     const request = axios.get(baseUrl)

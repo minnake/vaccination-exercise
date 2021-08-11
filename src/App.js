@@ -4,7 +4,6 @@ import antiquaService from './services/antiqua'
 import solarBuddhicaService from './services/solarBuddhica'
 import zerpfyService from './services/zerpfy'
 import './index.css'
-//import moment from 'moment'
 import { DateTime } from 'luxon'
 import Vaccinations from './components/Vaccinations'
 //import { orderBy } from 'lodash'
@@ -45,10 +44,8 @@ const App = () => {
   //format date to form YYYY-MM-DD. Right now formatted to dd.mm.yyyy
   const formatDate = (value) => {
     const date = DateTime.fromISO(value).toUTC()
-    //const formatDate = date.minus({ hours: 2 }).setLocale('fi').toLocaleString(DateTime.DATE_SHORT)
     //console.log(date)
     return date
-    //moment(value).format('YYYY-MM-DD')
   }
 
   /*compare manufacturers.id to vaccinations.sourceBottle and count, how many times
@@ -74,11 +71,10 @@ const App = () => {
   const injectionsDone = vaccinations.length
 
   //vaccines that came 2021-03-20 -> right sum is 61
-  const arrivalDay = DateTime.fromObject({year: 2021, day:20, month:3}).toISODate()
+  const arrivalDay = DateTime.fromObject({ year: 2021, day: 20, month: 3 }).toISODate()
   //console.log(arrivalDay)
   const arrivedOrdersSum = manufacturers.filter(item => arrivalDay === item.arrived.toISODate()).length
 
-  //sum of the all injections in bottle -> 25015
   /*const totalVaccinesBottle = manufacturers.reduce((total, value) => total = total + value.injections, 0)
   console.log(totalVaccinesBottle) */
 
