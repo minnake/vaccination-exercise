@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/api/antiquas'
+const baseUrl = 'http://localhost:3003/antiqua'
 
 const getAll = () => {
     const request = axios.get(baseUrl)
