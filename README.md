@@ -1,8 +1,16 @@
-# Getting Started with Create React App
+# Vaccination exercise
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+This project is made for [Solita Dev Akatemia](https://github.com/solita/vaccine-exercise-2021), where you can read more about this web application assignment.
+
+## How to run this project?
+
+
 ## Available Scripts
+
+
+### `npm install modules`
 
 In the project directory, you can run:
 
