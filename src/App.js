@@ -9,7 +9,6 @@ import Vaccinations from './components/Vaccinations'
 import Loading from './components/Loading'
 import Clock from './components/Clock'
 
-
 const App = () => {
   const [vaccinations, setVaccinations] = useState([])
   const [antiqua, setAntiqua] = useState([])
@@ -111,9 +110,8 @@ const App = () => {
     <div>
       <div>
         {isLoading === true ?
-          < Loading />:<Clock/>
-          
-          }
+          < Loading /> : <Clock />
+        }
       </div>
 
       <div>
