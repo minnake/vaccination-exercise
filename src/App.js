@@ -6,7 +6,7 @@ import solarBuddhicaService from './services/solarBuddhica'
 import zerpfyService from './services/zerpfy'
 import './index.css'
 import { DateTime } from 'luxon'
-import Vaccinations from './components/Vaccinations'
+//import Vaccinations from './components/Vaccinations'
 import Loading from './components/Loading'
 import Clock from './components/Clock'
 
@@ -60,7 +60,7 @@ const App = () => {
     return injectionSum
   }
 
-  //join Antiqua, SolarBuddhica and Zerpfy arrays to one
+  //join Antiqua, SolarBuddhica and Zerpfy arrays to one array
   const manufacturers = [...antiqua, ...solarBuddhica, ...zerpfy].map(item => ({
     ...item,
     arrived: formatDate(item.arrived),
@@ -114,16 +114,10 @@ const App = () => {
           < Loading /> : <Clock />
         }
       </div>
-
       <div>
-        <h2>Vaccinations exercise</h2>
+        <h2>VACCINATION EXCERCISE</h2>
+        <hr />
       </div>
-      {/*<div>
-         <p>Antiqua vaccine (4 injections in 1 bottle)</p>
-        <p>SolarBuddhica vaccine (6 injections in 1 bottle)</p>
-        <p>Zerpfy vaccine (5 injections in 1 bottle)</p> 
-      </div>*/}
-
       <div className="card-group">
         <div className="card border">
           <div className="card-body">
@@ -162,36 +156,37 @@ const App = () => {
         </div>
       </div>
 
-      <div>
-        <div>
-          <p>Total number of injections {totalInjectionSum}.</p>
-          <p>Total number of injections left {totalInjectionSum - injectionsDone}</p>
+      <div className="card-group singleCard">
+        <div className="card border">
+          <div className="card-body">
+            <h5 className="card-title">FACTS ABOUT VACCINATIONS</h5>
+            <div className="card-body"></div>
+            <ul>
+              <li>Total number of orders: {orderSum}</li>
+              <li>Total number of vaccinations done: {injectionsDone}</li>
+              <li>{arrivalDay} arrived {arrivedOrdersSum} orders</li>
+            </ul>
+            <ul>
+              <li>Females vaccinated: {femaleVaccined}</li>
+              <li>Males vaccinated: {maleVaccined}</li>
+              <li>Nonbinaries vaccinated: {nonVaccined}</li>
+            </ul>
+            <ul>
+              <li>Bottles that has not injected any vaccine: {valueZero}</li>
+              <li>Total number of bottles that has used all vaccines: </li>
+            </ul>
+            <ul>
+              <li>Total number of injections: {totalInjectionSum}</li>
+              <li>Total number of injections left: {totalInjectionSum - injectionsDone}</li>
+            </ul>
+          </div>
         </div>
-        <div>
-          <p>Total number of orders {orderSum}.</p>
-          <p>{arrivalDay} arrived {arrivedOrdersSum} orders.</p>
-        </div>
-        <div>
-          <p>Vaccinations done {injectionsDone}.</p>
-          <p>Total number of vaccined females {femaleVaccined}.</p>
-          <p>Total number of vaccined males {maleVaccined}.</p>
-          <p>Total number of vaccined nonbinaries {nonVaccined}.</p>
-          <p>Total number of bottles not given any injections {valueZero}.</p>
-          <p>Total number of bottles that has used all vaccines.</p>
-        </div>
-        {/*<div>
-           <p>When counted from 2021-04-12 12 590 vaccines expired before usage (injections in the expiring bottles 17 423
-          and injections done from the expired bottles 4833)</p> 
-          <p>When counted from 2021-04-12 -number- vaccines expired
-            before usage (injections in the expiring bottles -number-
-            and injections done from the expired bottles -number-)</p>
-        </div>*/}
       </div>
-      <div>
+      {/*  <div className="container">
         <table>
           <Vaccinations manufacturers={manufacturers} />
         </table>
-      </div>
+      </div> */}
     </div>
   )
 

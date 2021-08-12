@@ -1,5 +1,5 @@
 div {
-  padding: 10px 0px 0px 25px;
+  padding: 10px 10px 10px 10px;
 }
 
 table {
@@ -31,6 +31,17 @@ td {
   100% { transform: rotate(360deg); }
 }
 
+h2 {
+  text-align: center;
+  letter-spacing: 5px;
+  padding-bottom: 15px;
+}
+
+hr  {
+  width: 550px;
+  margin: 0 auto;
+}
+
 .card {
   margin: 20px;
 }
@@ -38,4 +49,12 @@ td {
 .card-title {
   text-align: center;
   letter-spacing: 5px;
+}
+
+.singleCard {
+  padding: 0px 250px 0px 250px;
+}
+
+.container {
+  padding: 50px 150px 20px 150px;
 }
