@@ -6,7 +6,7 @@ import solarBuddhicaService from './services/solarBuddhica'
 import zerpfyService from './services/zerpfy'
 import './index.css'
 import { DateTime } from 'luxon'
-//import Vaccinations from './components/Vaccinations'
+import Vaccinations from './components/Vaccinations'
 import Loading from './components/Loading'
 import Clock from './components/Clock'
 
@@ -46,7 +46,8 @@ const App = () => {
     })()
   })
 
-  //format date to form YYYY-MM-DD. Right now formatted to dd.mm.yyyy
+
+  //format date
   const formatDate = (value) => {
     const date = DateTime.fromISO(value).toUTC()
     //console.log(date)
@@ -73,13 +74,13 @@ const App = () => {
   const zerpfyTotal = manufacturers.filter(item => item.vaccine === 'Zerpfy').length
 
   //Total sum of the injections in bottles
-  const totalInjectionSum = manufacturers.reduce((acc, value) => acc = acc + value.injections, 0)
+  //const totalInjectionSum = manufacturers.reduce((acc, value) => acc = acc + value.injections, 0)
 
   //total sum of orders
   const orderSum = manufacturers.length
 
   //total sum of injections done
-  const injectionsDone = vaccinations.length
+  //const injectionsDone = vaccinations.length
 
   //vaccines that came 2021-03-20 -> right sum is 61
   const arrivalDay = DateTime.fromObject({ year: 2021, day: 20, month: 3 }).toISODate()
@@ -89,18 +90,6 @@ const App = () => {
   const femaleVaccined = vaccinations.filter(item => item.gender === 'female').length
   const maleVaccined = vaccinations.filter(item => item.gender === 'male').length
   const nonVaccined = vaccinations.filter(item => item.gender === 'nonbinary').length
-
-  //check how  many vaccines expired "2021-04-12" => 12590 
-  //-> bottle expires in 30 days from arrival
-  //-> remaining injections in expired bottles
-  //-> injections done from the expired bottles
-
-  //const endDay = DateTime.fromObject({ year: 2021, day: 12, month: 4 }).toISODate()
-  /*const result = manufacturers.filter(item => item.arrived.toISODate() >= endDay).length
-  console.log(result)
-
-  const expiredVaccines = manufacturers.reduce((acc, value) =>
-    value.arrived.toISODate() <= endDay ? acc + value.injections - value.injectionSum : acc, 0)*/
 
   //numbers of bottle with no injections done
   const valueZero = manufacturers.filter(item => item.injectionSum === 0).length
@@ -163,7 +152,7 @@ const App = () => {
             <div className="card-body"></div>
             <ul>
               <li>Total number of orders: {orderSum}</li>
-              <li>Total number of vaccinations done: {injectionsDone}</li>
+              {/* <li>Total number of vaccinations done: {injectionsDone}</li> */}
               <li>{arrivalDay} arrived {arrivedOrdersSum} orders</li>
             </ul>
             <ul>
@@ -176,17 +165,17 @@ const App = () => {
               <li>Total number of bottles that has used all vaccines: </li>
             </ul>
             <ul>
-              <li>Total number of injections: {totalInjectionSum}</li>
-              <li>Total number of injections left: {totalInjectionSum - injectionsDone}</li>
+              {/* <li>Total number of injections: {totalInjectionSum}</li> */}
+              {/* <li>Total number of injections left: {totalInjectionSum - injectionsDone}</li> */}
             </ul>
           </div>
         </div>
       </div>
-      {/*  <div className="container">
+     <div className="container">
         <table>
           <Vaccinations manufacturers={manufacturers} />
         </table>
-      </div> */}
+      </div> 
     </div>
   )
 
