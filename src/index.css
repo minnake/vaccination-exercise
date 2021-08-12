@@ -30,3 +30,12 @@ td {
   0%  { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.card {
+  margin: 20px;
+}
+
+.card-title {
+  text-align: center;
+  letter-spacing: 5px;
+}

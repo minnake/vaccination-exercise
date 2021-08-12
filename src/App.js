@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import 'bootstrap/dist/css/bootstrap.css'
 import vaccinationsSercive from './services/vaccinations'
 import antiquaService from './services/antiqua'
 import solarBuddhicaService from './services/solarBuddhica'
@@ -122,11 +123,47 @@ const App = () => {
         <p>SolarBuddhica vaccine (6 injections in 1 bottle)</p>
         <p>Zerpfy vaccine (5 injections in 1 bottle)</p> 
       </div>*/}
+
+      <div className="card-group">
+        <div className="card border">
+          <div className="card-body">
+            <h5 className="card-title">ANTIQUA</h5>
+            <div className="card-body">
+              <ul>
+                <li>Total number of orders: {antiquaTotal}</li>
+                <li>Total sum of injections: {antiquaTotal * 4}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="card border">
+          <div className="card-body">
+            <h5 className="card-title">SOLARBUDDHICA</h5>
+            <div className="card-body">
+              <ul>
+                <li>Total number of orders: {antiquaTotal}</li>
+                <li>Total sum of injections: {solarBuddhicaTotal * 6}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="card border">
+          <div className="card-body">
+            <h5 className="card-title">ZERPFY</h5>
+            <div className="card-body">
+              <ul>
+                <li>Total number of orders: {zerpfyTotal}</li>
+                <li>Total sum of injections: {zerpfyTotal * 5}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div>
         <div>
-          <p>Total number of Antiqua vaccine orders {antiquaTotal} and total number of injections {antiquaTotal * 4}.</p>
-          <p>Total number of SolarBuddhica vaccine orders {solarBuddhicaTotal} and total number of injections {solarBuddhicaTotal * 6}.</p>
-          <p>Total number of Zerpfy vaccine orders {zerpfyTotal} and total number of injections {zerpfyTotal * 5}.</p>
           <p>Total number of injections {totalInjectionSum}.</p>
           <p>Total number of injections left {totalInjectionSum - injectionsDone}</p>
         </div>
