@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
-import vaccinationsSercive from './services/vaccinations'
-import antiquaService from './services/antiqua'
-import solarBuddhicaService from './services/solarBuddhica'
-import zerpfyService from './services/zerpfy'
 import './index.css'
 import { DateTime } from 'luxon'
 import { CircularProgress } from '@material-ui/core'
+import getAll from './services/getAll'
 import Cards from './components/Cards'
 import FactsCards from './components/FactsCard'
 
@@ -20,37 +17,33 @@ const App = () => {
   const [solarBuddhica, setSolarBuddhica] = useState([])
   const [zerpfy, setZerpfy] = useState([])
   const [isLoaded, setIsLoaded] = useState(false)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     (async () => {
-      await vaccinationsSercive
-        .getAll()
+      await getAll("vaccinations")
         .then(initialVaccinations => {
-          setIsLoaded(true)
           setVaccinations(initialVaccinations)
-        })
-      await antiquaService
-        .getAll()
+        }).catch(error => { setError(error) })
+      await getAll("antiquas")
         .then(initialVaccinations => {
           setAntiqua(initialVaccinations)
-        })
-      await solarBuddhicaService
-        .getAll()
+        }).catch(error => { setError(error) })
+      await getAll("solarbuddhicas")
         .then(initialVaccinations => {
           setSolarBuddhica(initialVaccinations)
-        })
-      await zerpfyService
-        .getAll()
+        }).catch(error => { setError(error) })
+      await getAll("zerpfies")
         .then(initialVaccinations => {
           setZerpfy(initialVaccinations)
-        })
+        }).catch(error => { setError(error) })
+      setIsLoaded(true)
     })()
   })
 
   //format date
   const formatDate = (value) => {
     const date = DateTime.fromISO(value).toUTC()
-    //console.log(date)
     return date
   }
 
@@ -70,15 +63,20 @@ const App = () => {
 
   if (!isLoaded) {
     return <div id="circularProgress"><CircularProgress size={200} style={{ 'color': 'lightblue' }} /></div>
-  } else {
-    return (
-      <div>
-        <h2>VACCINATION EXCERCISE</h2>
-        <hr />
+  }
 
-        <Cards manufacturers={manufacturers} />
-        <FactsCards manufacturers={manufacturers} vaccinations={vaccinations} />
-        {/*<div className="tableDiv">
+  if (error) {
+    return <div><p>{error}</p></div>
+  }
+
+  return (
+    <div>
+      <h2>VACCINATION EXCERCISE</h2>
+      <hr />
+
+      <Cards manufacturers={manufacturers} />
+      <FactsCards manufacturers={manufacturers} vaccinations={vaccinations} />
+      {/*<div className="tableDiv">
           <table>
             <Vaccinations vaccinations={vaccinations} />
           </table>
@@ -89,9 +87,8 @@ const App = () => {
             <Manufacturers manufacturers={manufacturers} />
           </table>
         </div>*/}
-      </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default App

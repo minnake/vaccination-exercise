@@ -17,7 +17,7 @@ const Cards = ({ manufacturers }) => {
         <h5 className="card-title">ANTIQUA</h5>
         <div className="card-body">
           <ul>
-            <li>Total number of orders: {antiquaTotal}</li>
+            <li data-testid="antiqua-total-orders">Total number of orders: {antiquaTotal} </li>
             <li>Total sum of injections: {antiquaTotal * 4}</li>
           </ul>
         </div>
