@@ -6,10 +6,10 @@ This project is made for [Solita Dev Akatemia](https://github.com/solita/vaccine
 
 ## How to run this project?
 
-1. Fork this project and also [vaccination-excersice-backend](https://github.com/minnake/vaccination-exercise-backend)- Download projects to your computer inside same folder.
+1. Fork this project and also [vaccination-excersice-backend](https://github.com/minnake/vaccination-exercise-backend). Download projects to your computer and save inside same folder.
 2. Open vaccination exercise project folder in i.e. Visual Studio Code and open terminal.
 3. Run in terminal 'npm install modules'.
-4. Open new window in Visual Studio Code and open vaccination exercise backend folder. 
+4. Open new window in Visual Studio Code and open vaccination exercise backend project folder. 
 
 **Note!** You need to create .env -file in project directory and add MONGODB_URI=mongodb+srv://minna:testi123@cluster0.hujxy.mongodb.net/vaccination-exercise?retryWrites=true
 PORT=3001 to .env -file and save it.
