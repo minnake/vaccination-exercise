@@ -12,7 +12,7 @@ This project is made for [Solita Dev Akatemia](https://github.com/solita/vaccine
 4. Open new window in Visual Studio Code and open vaccination exercise backend project folder. 
 
 **Note!** You need to create .env -file in project directory. Add these two lines to .env -file and save it:
->MONGODB_URI=mongodb+srv://minna:testi123@cluster0.hujxy.mongodb.net/vaccination-exercise?retryWrites=true
+>MONGODB_URI=mongodb+srv://minna:testi123@cluster0.hujxy.mongodb.net/vaccination-exercise?retryWrites=true<br>
 >PORT=3001 to
 
 After that open terminal and run first 'npm install modules' and after that npm start'.
