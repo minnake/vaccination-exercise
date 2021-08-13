@@ -7,21 +7,14 @@ import zerpfyService from './services/zerpfy'
 import './index.css'
 import { DateTime } from 'luxon'
 import Vaccinations from './components/Vaccinations'
-import Loading from './components/Loading'
-import Clock from './components/Clock'
 
 const App = () => {
   const [vaccinations, setVaccinations] = useState([])
   const [antiqua, setAntiqua] = useState([])
   const [solarBuddhica, setSolarBuddhica] = useState([])
   const [zerpfy, setZerpfy] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 2500);
-
     (async () => {
       await vaccinationsSercive
         .getAll()
@@ -45,7 +38,6 @@ const App = () => {
         })
     })()
   })
-
 
   //format date
   const formatDate = (value) => {
@@ -74,7 +66,7 @@ const App = () => {
   const zerpfyTotal = manufacturers.filter(item => item.vaccine === 'Zerpfy').length
 
   //Total sum of the injections in bottles
-  //const totalInjectionSum = manufacturers.reduce((acc, value) => acc = acc + value.injections, 0)
+  const totalInjectionSum = manufacturers.reduce((acc, value) => acc = acc + value.injections, 0)
 
   //total sum of orders
   const orderSum = manufacturers.length
@@ -98,11 +90,11 @@ const App = () => {
 
   return (
     <div>
-      <div>
+      {/* <div>
         {isLoading === true ?
           < Loading /> : <Clock />
         }
-      </div>
+      </div> */}
       <div>
         <h2>VACCINATION EXCERCISE</h2>
         <hr />
@@ -165,7 +157,7 @@ const App = () => {
               <li>Total number of bottles that has used all vaccines: </li>
             </ul>
             <ul>
-              {/* <li>Total number of injections: {totalInjectionSum}</li> */}
+              <li>Total number of injections: {totalInjectionSum}</li>
               {/* <li>Total number of injections left: {totalInjectionSum - injectionsDone}</li> */}
             </ul>
           </div>
