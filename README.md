@@ -10,10 +10,8 @@ This project is made for [Solita Dev Akatemia](https://github.com/solita/vaccine
 2. Open vaccination exercise project folder in i.e. Visual Studio Code and open terminal.
 3. Run in terminal 'npm install modules'.
 4. Open new window in Visual Studio Code and open vaccination exercise backend project folder. 
-5. Create .env -file in project directory. Add these two lines to .env -file and save it:
->MONGODB_URI=mongodb+srv://minna:testi123@cluster0.hujxy.mongodb.net/vaccination-exercise?retryWrites=true<br>
->PORT=3001
+5. Create .env -file in project directory and ask credentials from me.
 6. After that open terminal and run first 'npm install modules' and then 'npm start'.
 7. Now backend is on. Go back to vaccination exercise and run in terminal 'npm start'
 
-Project will open to http://localhost:3000 and backend is running in http://localhosta:3001.
+Project will open to http://localhost:3000 and backend is running in http://localhost:3001.
