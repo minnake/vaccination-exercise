@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-This project is made for [Solita Dev Akatemia](https://github.com/solita/vaccine-exercise-2021) and  assignment is to make a web application for presenting some interesting data about the vaccinations.
+This project is made for [Solita Dev Akatemia](https://github.com/solita/vaccine-exercise-2021).
 
 ## How to run this project?
 
