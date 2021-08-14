@@ -62,7 +62,7 @@ const App = () => {
   }))
 
   if (!isLoaded) {
-    return <div id="circularProgress"><CircularProgress size={200} style={{ 'color': 'lightblue' }} /></div>
+    return <div id="circularProgress"><CircularProgress size={100} style={{ 'color': 'lightblue' }} /></div>
   }
 
   if (error) {
@@ -70,12 +70,14 @@ const App = () => {
   }
 
   return (
-    <div>
+
+    <div className="container">
       <h2>VACCINATION EXCERCISE</h2>
       <hr />
 
       <Cards manufacturers={manufacturers} />
       <FactsCards manufacturers={manufacturers} vaccinations={vaccinations} />
+
       {/*<div className="tableDiv">
           <table>
             <Vaccinations vaccinations={vaccinations} />
@@ -88,6 +90,8 @@ const App = () => {
           </table>
         </div>*/}
     </div>
+
+
   )
 }
 

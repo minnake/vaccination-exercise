@@ -13,11 +13,12 @@ const Cards = ({ manufacturers }) => {
 
   return (
     <div className="card-group">
+
       <div className="card border">
         <h5 className="card-title">ANTIQUA</h5>
         <div className="card-body">
           <ul>
-            <li data-testid="antiqua-total-orders">Total number of orders: {antiquaTotal} </li>
+            <li>Total number of orders: {antiquaTotal} </li>
             <li>Total sum of injections: {antiquaTotal * 4}</li>
           </ul>
         </div>

@@ -25,10 +25,13 @@ const FactsCards = ({ manufacturers, vaccinations }) => {
     const valueZero = manufacturers.filter(item => item.injectionSum === 0).length
 
     return (
-        <div className="card-group" id="singleCard">
+        <div className="card-group">
+
+            <div className="card"></div>
+
             <div className="card border">
                 <h5 className="card-title">FACTS ABOUT VACCINATIONS</h5>
-                <div className="card-body" id="singleCardBody">
+                <div className="card-body">
                     <ul>
                         <li>Total number of orders: {orderSum}</li>
                         <li>Total number of vaccinations done: {injectionsDone}</li>
@@ -46,7 +49,10 @@ const FactsCards = ({ manufacturers, vaccinations }) => {
                     </ul>
                 </div>
             </div>
+
+            <div className="card"></div>
         </div>
+
     )
 }
 
