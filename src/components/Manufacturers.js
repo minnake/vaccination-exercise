@@ -2,7 +2,6 @@ import React from 'react'
 import { DateTime } from 'luxon'
 
 const Manufacturers = ({ manufacturers }) => {
-    //console.log(vaccinations.map(item => item))
     return (
         <tbody>
             <tr>
